@@ -887,7 +887,7 @@
 
 // The size of the print bed
 #define X_BED_SIZE 195
-#define Y_BED_SIZE 195
+#define Y_BED_SIZE 186
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS -9
@@ -1065,7 +1065,7 @@
 
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-  #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 5              // Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
@@ -1117,7 +1117,7 @@
 #define LEVEL_BED_CORNERS
 
 #if ENABLED(LEVEL_BED_CORNERS)
-  #define LEVEL_CORNERS_INSET 20    // (mm) An inset for corner leveling
+  #define LEVEL_CORNERS_INSET 10    // (mm) An inset for corner leveling
   #define LEVEL_CORNERS_Z_HOP  5  // (mm) Move nozzle up before moving between corners
   #define LEVEL_CENTER_TOO        // Move to the center after the last corner
 #endif
