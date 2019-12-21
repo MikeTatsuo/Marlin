@@ -1190,27 +1190,27 @@
  *    +-------------->X     +-------------->X     +-------------->Y
  *     XY_SKEW_FACTOR        XZ_SKEW_FACTOR        YZ_SKEW_FACTOR
  */
-// #define SKEW_CORRECTION
+#define SKEW_CORRECTION
 
 #if ENABLED(SKEW_CORRECTION)
   // Input all length measurements here:
-  // #define XY_DIAG_AC 282.8427124746
-  // #define XY_DIAG_BD 282.8427124746
-  #define XY_SIDE_AD 200
+  #define XY_DIAG_AC 141.85
+  #define XY_DIAG_BD 141.25
+  #define XY_SIDE_AD 99.3
 
   // Or, set the default skew factors directly here
   // to override the above measurements:
-  #define XY_SKEW_FACTOR 0.0
+  //#define XY_SKEW_FACTOR 0.0
 
-  #define SKEW_CORRECTION_FOR_Z
+  //#define SKEW_CORRECTION_FOR_Z
   #if ENABLED(SKEW_CORRECTION_FOR_Z)
-    // #define XZ_DIAG_AC 282.8427124746
-    // #define XZ_DIAG_BD 282.8427124746
-    #define YZ_DIAG_AC 140.60
-    #define YZ_DIAG_BD 140.20
-    #define YZ_SIDE_AD 100.30
-    #define XZ_SKEW_FACTOR 0.0
-    // #define YZ_SKEW_FACTOR 0.0
+    #define XZ_DIAG_AC 141.54
+    #define XZ_DIAG_BD 141.30
+    #define YZ_DIAG_AC 141.18
+    #define YZ_DIAG_BD 141.55
+    #define YZ_SIDE_AD 105.07
+    //#define XZ_SKEW_FACTOR 0.0
+    //#define YZ_SKEW_FACTOR 0.0
   #endif
 
   // Enable this option for M852 to set skew at runtime
