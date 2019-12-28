@@ -655,8 +655,8 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define DEFAULT_XJERK                 10.0
-#define DEFAULT_YJERK                 10.0
+#define DEFAULT_XJERK                  5.0
+#define DEFAULT_YJERK                  5.0
 #define DEFAULT_ZJERK                  0.3
 #define DEFAULT_EJERK                  5.0
 
@@ -1202,14 +1202,14 @@
   // to override the above measurements:
   //#define XY_SKEW_FACTOR 0.0
 
-  //#define SKEW_CORRECTION_FOR_Z
+  #define SKEW_CORRECTION_FOR_Z
   #if ENABLED(SKEW_CORRECTION_FOR_Z)
-    #define XZ_DIAG_AC 141.54
-    #define XZ_DIAG_BD 141.30
-    #define YZ_DIAG_AC 141.18
-    #define YZ_DIAG_BD 141.55
-    #define YZ_SIDE_AD 105.07
-    //#define XZ_SKEW_FACTOR 0.0
+    //#define XZ_DIAG_AC 141.54
+    //#define XZ_DIAG_BD 141.30
+    #define YZ_DIAG_AC 141.40
+    #define YZ_DIAG_BD 141.70
+    #define YZ_SIDE_AD 100.03
+    #define XZ_SKEW_FACTOR 0.0
     //#define YZ_SKEW_FACTOR 0.0
   #endif
 
