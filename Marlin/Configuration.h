@@ -1202,14 +1202,15 @@
   // to override the above measurements:
   //#define XY_SKEW_FACTOR 0.0
 
-  //#define SKEW_CORRECTION_FOR_Z
+  #define SKEW_CORRECTION_FOR_Z
   #if ENABLED(SKEW_CORRECTION_FOR_Z)
-    //#define XZ_DIAG_AC 141.54
-    //#define XZ_DIAG_BD 141.30
-    #define YZ_DIAG_AC 141.40
-    #define YZ_DIAG_BD 141.70
-    #define YZ_SIDE_AD 100.03
-    #define XZ_SKEW_FACTOR 0.0
+    #define XZ_DIAG_AC 141.30
+    #define XZ_DIAG_BD 141.95
+    #define XZ_DIAG_AD 100.14
+    //#define YZ_DIAG_AC 141.40
+    //#define YZ_DIAG_BD 141.70
+    //#define YZ_SIDE_AD 100.03
+    //#define XZ_SKEW_FACTOR 0.0
     //#define YZ_SKEW_FACTOR 0.0
   #endif
 
