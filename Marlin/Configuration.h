@@ -1211,7 +1211,7 @@
     //#define YZ_DIAG_BD 141.70
     //#define YZ_SIDE_AD 100.03
     //#define XZ_SKEW_FACTOR 0.0
-    //#define YZ_SKEW_FACTOR 0.0
+    #define YZ_SKEW_FACTOR 0.0
   #endif
 
   // Enable this option for M852 to set skew at runtime
