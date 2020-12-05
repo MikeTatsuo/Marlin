@@ -3380,8 +3380,8 @@ void Temperature::tick() {
 
       const bool wants_to_cool = isProbeAboveTemp(target_temp);
       const bool will_wait = !(wants_to_cool && no_wait_for_cooling);
-      if (will_wait)
-        SERIAL_ECHOLNPAIR("Waiting for probe to ", (wants_to_cool ? PSTR("cool down") : PSTR("heat up")), " to ", target_temp, " degrees.");
+
+      SERIAL_ECHOLNPAIR("Waiting for probe to ", (wants_to_cool ? "cool down" : "heat up"), " to ", target_temp, " degrees.");
 
       #if DISABLED(BUSY_WHILE_HEATING) && ENABLED(HOST_KEEPALIVE_FEATURE)
         KEEPALIVE_STATE(NOT_BUSY);
@@ -3419,7 +3419,7 @@ void Temperature::tick() {
 
         // Loop until the temperature is very close target
         if (!(wants_to_cool ? isProbeAboveTemp(target_temp) : isProbeBelowTemp(target_temp))) {
-            SERIAL_ECHOLN(wants_to_cool ? PSTR("Cooldown") : PSTR("Heatup"));
+            SERIAL_ECHO(wants_to_cool ? "Cooldown" : "Heatup");
             SERIAL_ECHOLNPGM(" complete, target probe temperature reached.");
             break;
         }

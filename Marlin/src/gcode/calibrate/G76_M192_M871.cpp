@@ -254,7 +254,7 @@ void GcodeSuite::G76() {
       // Move probe to probing point and wait for it to reach target temperature
       do_blocking_move_to(noz_pos_xyz);
 
-      SERIAL_ECHOLNPAIR("Waiting for probe heating. Bed:", target_bed, " Probe:", target_probe);
+      SERIAL_ECHOLNPGM("Waiting for probe heating.");
       const millis_t probe_timeout_ms = millis() + 900UL * 1000UL;
       while (thermalManager.degProbe() < target_probe) {
         if (report_temps(next_temp_report, probe_timeout_ms)) {
@@ -267,6 +267,15 @@ void GcodeSuite::G76() {
 
       const float measured_z = g76_probe(TSI_PROBE, target_probe, noz_pos_xyz);
       if (isnan(measured_z) || target_probe > cali_info_init[TSI_PROBE].end_temp) break;
+
+      report_targets(target_bed, target_probe);
+
+      // Park probe to cooldown before next measurement if necessary
+      if (thermalManager.degProbe() > target_probe) {
+        do_blocking_move_to(parkpos);
+        while (thermalManager.degProbe() > target_probe - 1)
+          report_temps(next_temp_report);
+      }
     }
 
     SERIAL_ECHOLNPAIR("Retrieved measurements: ", temp_comp.get_index());
@@ -344,13 +353,16 @@ void GcodeSuite::M192() {
   if (DEBUGGING(DRYRUN)) return;
 
   const bool no_wait_for_cooling = parser.seenval('S');
-  if (!no_wait_for_cooling && ! parser.seenval('R')) {
+  if (!no_wait_for_cooling && !parser.seenval('R')) {
     SERIAL_ERROR_MSG("No target temperature set.");
     return;
   }
 
   const float target_temp = parser.value_celsius();
+  const xyz_pos_t parkpos = temp_comp.park_point;
   ui.set_status_P(thermalManager.isProbeBelowTemp(target_temp) ? GET_TEXT(MSG_PROBE_HEATING) : GET_TEXT(MSG_PROBE_COOLING));
+  if (thermalManager.isProbeAboveTemp(target_temp)) 
+    do_blocking_move_to(parkpos);
   thermalManager.wait_for_probe(target_temp, no_wait_for_cooling);
 }
 

@@ -47,44 +47,56 @@ typedef struct {
 
 // Probe temperature calibration constants
 #ifndef PTC_SAMPLE_COUNT
-  #define PTC_SAMPLE_COUNT 10U
+  #define PTC_SAMPLE_COUNT 10
 #endif
 #ifndef PTC_SAMPLE_RES
-  #define PTC_SAMPLE_RES 5.0f
+  #define PTC_SAMPLE_RES 5.0
 #endif
 #ifndef PTC_SAMPLE_START
-  #define PTC_SAMPLE_START 30.0f
+  #define PTC_SAMPLE_START 30.0
 #endif
 #define PTC_SAMPLE_END ((PTC_SAMPLE_START) + (PTC_SAMPLE_COUNT) * (PTC_SAMPLE_RES))
 
 // Bed temperature calibration constants
 #ifndef BTC_PROBE_TEMP
-  #define BTC_PROBE_TEMP 30.0f
+  #define BTC_PROBE_TEMP 30.0
 #endif
 #ifndef BTC_SAMPLE_COUNT
-  #define BTC_SAMPLE_COUNT 10U
+  #define BTC_SAMPLE_COUNT 10
 #endif
-#ifndef BTC_SAMPLE_STEP
-  #define BTC_SAMPLE_RES 5.0f
+#ifndef BTC_SAMPLE_RES
+  #define BTC_SAMPLE_RES 5.0
 #endif
 #ifndef BTC_SAMPLE_START
-  #define BTC_SAMPLE_START 60.0f
+  #define BTC_SAMPLE_START 60.0
 #endif
 #define BTC_SAMPLE_END ((BTC_SAMPLE_START) + (BTC_SAMPLE_COUNT) * (BTC_SAMPLE_RES))
 
+// Hotend temperature calibration constants
+#ifndef HTC_SAMPLE_COUNT
+  #define HTC_SAMPLE_COUNT 20
+#endif
+#ifndef HTC_SAMPLE_RES
+  #define HTC_SAMPLE_RES 5.0
+#endif
+#ifndef HTC_SAMPLE_START
+  #define HTC_SAMPLE_START 180.0
+#endif
+#define HTC_SAMPLE_END ((HTC_SAMPLE_START) + (HTC_SAMPLE_COUNT) * (HTC_SAMPLE_RES))
+
 #ifndef PTC_PROBE_HEATING_OFFSET
-  #define PTC_PROBE_HEATING_OFFSET 0.5f
+  #define PTC_PROBE_HEATING_OFFSET 0.5
 #endif
 
 #ifndef PTC_PROBE_RAISE
-  #define PTC_PROBE_RAISE 10.0f
+  #define PTC_PROBE_RAISE 10.0
 #endif
 
 static constexpr temp_calib_t cali_info_init[TSI_COUNT] = {
     {  PTC_SAMPLE_COUNT, PTC_SAMPLE_RES, PTC_SAMPLE_START, PTC_SAMPLE_END },       // Probe
     {  BTC_SAMPLE_COUNT, BTC_SAMPLE_RES, BTC_SAMPLE_START, BTC_SAMPLE_END },       // Bed
   #if ENABLED(USE_TEMP_EXT_COMPENSATION)
-    {  20,  5, 180, 180 +  5 * 20 }        // Extruder
+    {  HTC_SAMPLE_COUNT,  HTC_SAMPLE_RES, HTC_SAMPLE_START, HTC_SAMPLE_END }        // Extruder
   #endif
 };
 
@@ -100,7 +112,7 @@ class ProbeTempComp {
     static constexpr xy_pos_t measure_point    = PTC_PROBE_POS;     // Coordinates to probe
                             //measure_point    = { 12.0f, 7.3f };   // Coordinates for the MK52 magnetic heatbed
 
-    static constexpr int  probe_calib_bed_temp = BED_MAX_TARGET,  // Bed temperature while calibrating probe
+    static constexpr int  probe_calib_bed_temp = _MIN(BED_MAX_TARGET, BTC_SAMPLE_END),  // Bed temperature while calibrating probe
                           bed_calib_probe_temp = BTC_PROBE_TEMP;  // Probe temperature while calibrating bed
 
     static int16_t *sensor_z_offsets[TSI_COUNT],
