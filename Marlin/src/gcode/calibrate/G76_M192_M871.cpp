@@ -184,9 +184,16 @@ void GcodeSuite::G76() {
     uint16_t target_bed = cali_info_init[TSI_BED].start_temp,
              target_probe = temp_comp.bed_calib_probe_temp;
 
-    SERIAL_ECHOLNPGM("Waiting for cooling.");
-    while (thermalManager.degBed() > target_bed || thermalManager.degProbe() > target_probe)
-      report_temps(next_temp_report);
+    if (thermalManager.degBed() > target_bed || thermalManager.degProbe() >= target_probe){
+      
+      // Park nozzle
+      do_blocking_move_to(parkpos);
+      
+      SERIAL_ECHOLNPGM("Waiting for cooling.");
+      
+      while (thermalManager.degBed() > target_bed || thermalManager.degProbe() > target_probe - 1)
+        report_temps(next_temp_report);
+    }
 
     // Disable leveling so it won't mess with us
     TERN_(HAS_LEVELING, set_bed_leveling_enabled(false));
@@ -271,7 +278,7 @@ void GcodeSuite::G76() {
       report_targets(target_bed, target_probe);
 
       // Park probe to cooldown before next measurement if necessary
-      if (thermalManager.degProbe() > target_probe) {
+      if (thermalManager.degProbe() >= target_probe) {
         do_blocking_move_to(parkpos);
         while (thermalManager.degProbe() > target_probe - 1)
           report_temps(next_temp_report);
