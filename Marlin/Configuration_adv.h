@@ -30,7 +30,7 @@
  *
  * Basic settings can be found in Configuration.h
  */
-#define CONFIGURATION_ADV_H_VERSION 201217
+#define CONFIGURATION_ADV_H_VERSION 201221
 
 //===========================================================================
 //============================= Thermal Settings ============================
@@ -3218,7 +3218,7 @@
  *
  * Execute certain G-code commands immediately after power-on.
  */
-//#define STARTUP_COMMANDS "G28\nG0 X0 F7200\nG0 Z25 F300\nM501"
+#define STARTUP_COMMANDS "G28\nG34\nG27"
 
 /**
  * G-code Macros
