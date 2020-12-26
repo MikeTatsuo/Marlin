@@ -35,7 +35,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 201222
+#define CONFIGURATION_H_VERSION 201226
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -1578,12 +1578,12 @@
   #define NOZZLE_CLEAN_STROKES  1
 
   // Default number of triangles
-  #define NOZZLE_CLEAN_TRIANGLES  2
+  #define NOZZLE_CLEAN_TRIANGLES  5
 
   // Specify positions for each tool as { { X, Y, Z }, { X, Y, Z } }
   // Dual hotend system may use { {  -20, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) },  {  420, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) }}
-  #define NOZZLE_CLEAN_START_POINT { { -5, -5, (Z_MIN_POS + 3) } }
-  #define NOZZLE_CLEAN_END_POINT   { { 2.5, 10, (Z_MIN_POS + 3) } }
+  #define NOZZLE_CLEAN_START_POINT { { -7.5, 2.5, (Z_MIN_POS + 2) } }
+  #define NOZZLE_CLEAN_END_POINT   { { -1.5, 17.5, (Z_MIN_POS + 2) } }
 
   // Circular pattern radius
   #define NOZZLE_CLEAN_CIRCLE_RADIUS 6.5
