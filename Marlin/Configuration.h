@@ -35,7 +35,7 @@
  *
  * Advanced settings can be found in Configuration_adv.h
  */
-#define CONFIGURATION_H_VERSION 201226
+#define CONFIGURATION_H_VERSION 201228
 
 //===========================================================================
 //============================= Getting Started =============================
@@ -740,7 +740,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 1600, 400 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 160, 160, 3200, 800 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1582,8 +1582,8 @@
 
   // Specify positions for each tool as { { X, Y, Z }, { X, Y, Z } }
   // Dual hotend system may use { {  -20, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) },  {  420, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) }}
-  #define NOZZLE_CLEAN_START_POINT { { -7.5, 2.5, (Z_MIN_POS + 2) } }
-  #define NOZZLE_CLEAN_END_POINT   { { -1.5, 17.5, (Z_MIN_POS + 2) } }
+  #define NOZZLE_CLEAN_START_POINT { { -10, 2.5, (Z_MIN_POS + 2) } }
+  #define NOZZLE_CLEAN_END_POINT   { { -5, 17.5, (Z_MIN_POS + 2) } }
 
   // Circular pattern radius
   #define NOZZLE_CLEAN_CIRCLE_RADIUS 6.5
